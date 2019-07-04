@@ -3,6 +3,8 @@ from controller.oai_functions import *
 from controller.oai_errors import *
 import _config as conf
 from model.sample import SampleRenderer
+from _memprofile import memprofile
+import gc
 
 oai_ = Blueprint('oai', __name__)
 
@@ -22,6 +24,7 @@ def render_error(response_date, request_uri, oai_code, message, http_status=400)
 
 
 @oai_.route('/sample/oai', methods=['GET', 'POST'])
+@memprofile
 def oai():
     # date in OAI format
     response_date = datetime_to_datestamp(datetime.datetime.now())
@@ -161,7 +164,9 @@ def oai():
                     samples=samples,
                     resumptiontoken=token
                 )
-            del samples # See whether deleting this fixes memory leak
+            
+            del samples # Deleting this and forcing garbage collection fixes a major memory leak
+            gc.collect()
             
             return Response(xml,
                 mimetype='text/xml'
@@ -180,3 +185,4 @@ def oai():
             ),
             mimetype='text/xml'
         )
+

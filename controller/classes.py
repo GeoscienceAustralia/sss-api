@@ -20,11 +20,11 @@ def _get_items(page, per_page, elem_tag):
 
     r = None
     if elem_tag == 'IGSN':
-        r = requests.get(config.XML_API_URL_SAMPLESET.format(page, per_page), timeout=3)
+        r = requests.get((config.XML_API_URL_SAMPLESET).format(page, per_page), timeout=3)
     elif elem_tag == 'ENO':
-        r = requests.get(config.XML_API_URL_SITESET.format(page, per_page), timeout=3)
+        r = requests.get((config.XML_API_URL_SITESET).format(page, per_page), timeout=3)
     elif elem_tag == 'SURVEYID':
-        r = requests.get(config.XML_API_URL_SURVEY_REGISTER.format(page, per_page), timeout=3)
+        r = requests.get((config.XML_API_URL_SURVEY_REGISTER).format(page, per_page), timeout=3)
     else:
         print('Invalid tag')
         return None

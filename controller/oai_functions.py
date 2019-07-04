@@ -7,6 +7,7 @@ from model import sample
 from controller.oai_datestamp import *
 from controller.oai_errors import *
 import math
+from _memprofile import memprofile
 
 
 # https://www.openarchives.org/OAI/openarchivesprotocol.html, 3.6 Error and Exception Conditions
@@ -50,6 +51,7 @@ OAI_ARGS = {
 }
 
 
+@memprofile
 def validate_oai_parameters(qsa_args):
     """
     Validates GET or POST arguments against the OAI_ARGS dict
@@ -89,6 +91,7 @@ def validate_oai_parameters(qsa_args):
     return True
 
 
+@memprofile
 def list_records(metadataPrefix, resumptionToken=None, from_=None, until=None):
     # if we don't have a resumption token, start at the beginning
     if resumptionToken is None:
@@ -108,11 +111,14 @@ def list_records(metadataPrefix, resumptionToken=None, from_=None, until=None):
         samples.append(get_obj_vars_as_dict(
             sample.SampleRenderer(None, xml='<root>{}</root>'.format(etree.tostring(elem)))))
 
+    del r
+    
     resumption_token = get_resumption_token(metadataPrefix, resumptionToken, from_, until)
 
     return samples, resumption_token
 
 
+@memprofile
 def list_records_xml(metadataPrefix, resumptionToken=None, from_=None, until=None):
     no_per_page = conf.OAI_BATCH_SIZE
     page_no = 1
@@ -191,6 +197,7 @@ def list_records_xml(metadataPrefix, resumptionToken=None, from_=None, until=Non
     return samples, resumption_token
 
 
+@memprofile
 def get_resumption_token(metadataPrefix, resumptionToken=None, from_=None, until=None):
     """
     <resumptionToken expirationDate="2017-03-24T05:02:52Z"
@@ -235,6 +242,7 @@ def get_resumption_token(metadataPrefix, resumptionToken=None, from_=None, until
     return next_resumption_token
 
 
+@memprofile
 def get_earliest_date():
     """
     queries GA's ORACLE DB and gets the earliest modified
@@ -254,6 +262,7 @@ def get_earliest_date():
     return str2datetime(str_min_date)
 
 
+@memprofile
 def get_earliest_datestamp():
     """
     returns an OAI-PMH format datestamp of the earliest modified_date in GA's
@@ -264,6 +273,7 @@ def get_earliest_datestamp():
     return datetime_to_datestamp(get_earliest_date())
 
 
+@memprofile
 def get_complete_list_size(str_from_date=None, str_until_date=None):
     """
     queries GA's ORACLE DB and gets the number of records the query
@@ -292,6 +302,7 @@ def get_complete_list_size(str_from_date=None, str_until_date=None):
     return int(str_record_count)
 
 
+@memprofile
 def create_url_query_token(token):
     """
     returns the url to query GA's Samples database based
@@ -313,10 +324,12 @@ def create_url_query_token(token):
     return oracle_api_samples_url
 
 
+@memprofile
 def get_obj_vars_as_dict(x):
     return dict((key, getattr(x, key)) for key in dir(x) if key not in dir(x.__class__))
 
 
+@memprofile
 def calc_expiration_datestamp():
     """
     responseDate = 2017-02-08T06:01:12Z
