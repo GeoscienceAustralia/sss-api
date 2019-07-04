@@ -131,8 +131,8 @@ def list_records_xml(metadataPrefix, resumptionToken=None, from_=None, until=Non
             'set and metadataPrefix arguments results in an empty list.')
 
     samples = []
-
-    for event, elem in etree.iterparse(BytesIO(r.content), tag='ROW'):
+    xml_stream = BytesIO(r.content)
+    for event, elem in etree.iterparse(xml_stream, tag='ROW'):
         # create a Sample for each XML ROW
         sample_renderer = sample.SampleRenderer(None, '<root>{}</root>'.format(etree.tostring(elem)))
         if sample_renderer.date_modified is not None:
@@ -183,6 +183,9 @@ def list_records_xml(metadataPrefix, resumptionToken=None, from_=None, until=Non
 
         # add the OAI record to the list of samples
         samples.append(oai_record)
+        
+    xml_stream.close()
+    
     resumption_token = get_resumption_token(metadataPrefix, resumptionToken, from_, until)
 
     return samples, resumption_token
