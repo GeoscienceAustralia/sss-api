@@ -156,21 +156,22 @@ def oai():
                 request.values.get('until')
             )
 
-            xml = render_template(
+            response = Response(
+                render_template(
                     'oai_list_records.xml',
                     response_date=response_date,
                     request_uri=request.base_url,
                     metadataPrefix=request.values.get('metadataPrefix'),
                     samples=samples,
                     resumptiontoken=token
-                )
+                ),
+                mimetype='text/xml'
+            )
             
             del samples # Deleting this and forcing garbage collection fixes a major memory leak
             gc.collect()
             
-            return Response(xml,
-                mimetype='text/xml'
-            )
+            return response
 
         except OaiError as e:
             return render_error(response_date, request.base_url, e.oainame(), e)
