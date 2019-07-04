@@ -3,7 +3,7 @@ from controller.oai_functions import *
 from controller.oai_errors import *
 import _config as conf
 from model.sample import SampleRenderer
-from _memprofile import memprofile
+from memprofile import memprofile
 import gc
 
 oai_ = Blueprint('oai', __name__)

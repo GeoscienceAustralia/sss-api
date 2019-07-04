@@ -7,7 +7,7 @@ from model import sample
 from controller.oai_datestamp import *
 from controller.oai_errors import *
 import math
-from _memprofile import memprofile
+from memprofile import memprofile
 
 
 # https://www.openarchives.org/OAI/openarchivesprotocol.html, 3.6 Error and Exception Conditions
