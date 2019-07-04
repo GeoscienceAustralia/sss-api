@@ -180,7 +180,7 @@ def list_records_xml(metadataPrefix, resumptionToken=None, from_=None, until=Non
                 </metadata>
             </record>
                     '''.format(**oai_record_vars)
-
+        del oai_record_vars
         # add the OAI record to the list of samples
         samples.append(oai_record)
         
