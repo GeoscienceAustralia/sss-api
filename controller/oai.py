@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, Response
 from controller.oai_functions import *
 from controller.oai_errors import *
 import _config as conf
+from model.sample import SampleRenderer
 
 oai_ = Blueprint('oai', __name__)
 
@@ -42,7 +43,6 @@ def oai():
     # call underlying implementation, based on the verb, since all parameters are valid
     if request.values.get('verb') == 'GetRecord':
         try:
-            from model.sample import SampleRenderer
             s = SampleRenderer(request)
 
             if s.not_found:
