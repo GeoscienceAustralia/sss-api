@@ -153,15 +153,17 @@ def oai():
                 request.values.get('until')
             )
 
-            return Response(
-                render_template(
+            xml = render_template(
                     'oai_list_records.xml',
                     response_date=response_date,
                     request_uri=request.base_url,
                     metadataPrefix=request.values.get('metadataPrefix'),
                     samples=samples,
                     resumptiontoken=token
-                ),
+                )
+            del samples # See whether deleting this fixes memory leak
+            
+            return Response(xml,
                 mimetype='text/xml'
             )
 
