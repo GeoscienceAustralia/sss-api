@@ -29,7 +29,7 @@ def index():
     )
 
 
-@pages.route('/about')
+@pages.route('/about/')
 def about():
     return render_template(
         'page_about.html'
