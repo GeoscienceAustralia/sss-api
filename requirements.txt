@@ -11,3 +11,4 @@ isodate
 markdown
 SPARQLWrapper
 pyyaml
+connegp
