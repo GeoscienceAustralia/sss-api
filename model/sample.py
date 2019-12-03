@@ -367,6 +367,7 @@ class SampleRenderer(Renderer):
                 register_name='Sample Register',
                 class_uri=config.URI_SAMPLE_CLASS,
                 instance_uri=config.URI_SAMPLE_INSTANCE_BASE + self.igsn,
+                base_url=config.BASE_URL,
                 default_view_token=self.default_view_token,
                 views=self.views
             ),
