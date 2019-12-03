@@ -138,8 +138,8 @@ class SurveyRenderer(Renderer):
                 self.alternates_template or 'alternates.html',
                 register_name='Survey Register',
                 class_uri=config.URI_SURVEY_CLASS,
-                instance_uri=config.URI_SURVEY_INSTANCE_BASE + self.survey_no,
-                # base_url='',
+                instance_uri=config.URI_SURVEY_INSTANCE + self.survey_no,
+                base_url=config.BASE_URL,
                 default_view_token=self.default_view_token,
                 views=self.views
             ),

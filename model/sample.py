@@ -366,7 +366,7 @@ class SampleRenderer(Renderer):
                 self.alternates_template or 'alternates.html',
                 register_name='Sample Register',
                 class_uri=config.URI_SAMPLE_CLASS,
-                instance_uri=config.URI_SAMPLE_INSTANCE_BASE + self.igsn,
+                instance_uri=config.URI_SAMPLE_INSTANCE + self.igsn,
                 base_url=config.BASE_URL,
                 default_view_token=self.default_view_token,
                 views=self.views

@@ -258,10 +258,10 @@ class SiteRenderer(Renderer):
         return Response(
             render_template(
                 self.alternates_template or 'alternates.html',
-                instance_uri=config.URI_SITE_CLASS,
+                instance_uri=config.URI_SITE_CLASS, #TODO site class while sample and survey are site instance??
                 register_name='Site Register',
                 class_uri=self.site_type,
-               # base_url='',
+                base_url=config.BASE_URL,
                 default_view_token=self.default_view_token,
                 views=self.views
             ),
