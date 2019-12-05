@@ -58,7 +58,7 @@ class SampleRenderer(Renderer):
                 [
                     "text/html",
                     "text/turtle",
-                    "application/rdfxml",
+                    "application/rdf+xml",
                     "application/ld+json",
                     "application/xml",
                     "text/n3",
@@ -88,7 +88,7 @@ class SampleRenderer(Renderer):
             'igsn-o': View(
                 'IGSN Ontology View',
                 "An OWL ontology of Samples based on CSIRO's XML-based IGSN schema",
-                ["text/html", "text/turtle", "application/rdfxml", "application/ld+json"],
+                ["text/html", "text/turtle", "application/rdf+xml", "application/ld+json"],
                 'text/html',
                 profile_uri='http://pid.geoscience.gov.au/def/ont/ga/igsn'
             ),
@@ -96,7 +96,7 @@ class SampleRenderer(Renderer):
             'prov': View(
                 'PROV View',
                 "The W3C's provenance data model, PROV",
-                ["text/html", "text/turtle", "application/rdfxml", "application/ld+json"],
+                ["text/html", "text/turtle", "application/rdf+xml", "application/ld+json"],
                 "text/turtle",
                 profile_uri="http://www.w3.org/ns/prov/"
             ),
@@ -104,7 +104,7 @@ class SampleRenderer(Renderer):
             'sosa': View(
                 'SOSA View',
                 "The W3C's Sensor, Observation, Sample, and Actuator ontology within the Semantic Sensor Networks ontology",
-                ["text/turtle", "application/rdfxml", "application/ld+json"],
+                ["text/turtle", "application/rdf+xml", "application/ld+json"],
                 "text/turtle",
                 profile_uri="http://www.w3.org/ns/sosa/"
             ),
