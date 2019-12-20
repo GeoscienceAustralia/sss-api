@@ -262,6 +262,7 @@ class SiteRenderer(Renderer):
                 register_name='Site Register',
                 class_uri=self.site_type,
                 base_url=config.BASE_URL,
+                site_no=self.site_no,
                 default_view_token=self.default_view_token,
                 views=self.views
             ),
